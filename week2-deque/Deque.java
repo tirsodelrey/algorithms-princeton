@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.StdIn;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -121,7 +122,7 @@ public class Deque<Item> implements Iterable<Item>{
 
         @Override
         public Item next() {
-            if (current.next == null) {
+            if (current == null) {
                 throw new NoSuchElementException("there is no next element");
             }
             Item item = current.item;
@@ -137,6 +138,43 @@ public class Deque<Item> implements Iterable<Item>{
 
     // unit testing (required)
     public static void main(String[] args){
+        Deque<String> queue = new Deque<>();
+        int size = queue.size();
+        System.out.println(size);
 
+
+        while (!StdIn.isEmpty()){
+            String item = StdIn.readString();
+            if (!item.equals("-")){
+                queue.addFirst(item);
+                queue.addLast(item);
+            } else {
+                break;
+            }
+        }
+
+        Iterator<String> iterator = queue.iterator();
+
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+
+        System.out.println("-------- /n");
+        queue.removeFirst();
+
+        Iterator<String> iterator2 = queue.iterator();
+
+        while(iterator2.hasNext()){
+            System.out.println(iterator2.next());
+        }
+        System.out.println("-------- /n");
+
+        queue.removeLast();
+
+        Iterator<String> iterator3 = queue.iterator();
+
+        while (iterator3.hasNext()){
+            System.out.println(iterator3.next());
+        }
     }
 }

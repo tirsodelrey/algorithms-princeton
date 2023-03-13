@@ -1,8 +1,9 @@
 import edu.princeton.cs.algs4.StdIn;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Deque<Item> implements Iterable<Item>{
+public class Deque<Item> implements Iterable<Item> {
     // construct an empty deque
     private Node first;
     private Node last;
@@ -38,18 +39,18 @@ public class Deque<Item> implements Iterable<Item>{
         }
         Node newNode = new Node();
 
-        if(isEmpty()){
+        if (isEmpty()) {
             first = last = newNode;
             first.item = item;
             first.previous = null;
             first.next = null;
-        }
-        else {
+        } else {
             Node oldFirst = first;
             first = newNode;
             first.item = item;
             first.next = oldFirst;
             first.previous = null;
+            oldFirst.previous = first;
         }
         n++;
 
@@ -64,11 +65,10 @@ public class Deque<Item> implements Iterable<Item>{
         last = new Node();
         last.item = item;
         last.next = null;
-        if (isEmpty()){
+        if (isEmpty()) {
             first = last;
             last.previous = null;
-        }
-        else {
+        } else {
             oldLast.next = last;
             last.previous = oldLast;
         }
@@ -84,7 +84,7 @@ public class Deque<Item> implements Iterable<Item>{
         //get the item from old first
         Item item = first.item;
         first = first.next;
-        if (isEmpty()){
+        if (isEmpty()) {
             last = first;
         }
         n--;
@@ -99,7 +99,7 @@ public class Deque<Item> implements Iterable<Item>{
         Item item = last.item;
         last = last.previous;
         last.next = null;
-        if(isEmpty()){
+        if (isEmpty()) {
             first = last;
         }
         n--;
@@ -137,15 +137,15 @@ public class Deque<Item> implements Iterable<Item>{
     }
 
     // unit testing (required)
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Deque<String> queue = new Deque<>();
         int size = queue.size();
         System.out.println(size);
 
 
-        while (!StdIn.isEmpty()){
+        while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!item.equals("-")){
+            if (!item.equals("-")) {
                 queue.addFirst(item);
                 queue.addLast(item);
             } else {
@@ -155,7 +155,7 @@ public class Deque<Item> implements Iterable<Item>{
 
         Iterator<String> iterator = queue.iterator();
 
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             System.out.println(iterator.next());
         }
 
@@ -164,7 +164,7 @@ public class Deque<Item> implements Iterable<Item>{
 
         Iterator<String> iterator2 = queue.iterator();
 
-        while(iterator2.hasNext()){
+        while (iterator2.hasNext()) {
             System.out.println(iterator2.next());
         }
         System.out.println("-------- /n");
@@ -173,7 +173,7 @@ public class Deque<Item> implements Iterable<Item>{
 
         Iterator<String> iterator3 = queue.iterator();
 
-        while (iterator3.hasNext()){
+        while (iterator3.hasNext()) {
             System.out.println(iterator3.next());
         }
     }

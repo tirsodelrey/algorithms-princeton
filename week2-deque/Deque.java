@@ -84,8 +84,10 @@ public class Deque<Item> implements Iterable<Item> {
         //get the item from old first
         Item item = first.item;
         first = first.next;
-        if (isEmpty()) {
+        if (isEmpty() || n == 1) {
             last = first;
+        } else {
+            first.previous = null;
         }
         n--;
         return item;
@@ -96,11 +98,14 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) {
             throw new NoSuchElementException("can't remove last because queue is empty");
         }
+
         Item item = last.item;
-        last = last.previous;
-        last.next = null;
-        if (isEmpty()) {
-            first = last;
+
+        if (n == 1) {
+            first = first.previous;
+        } else {
+            last = last.previous;
+            last.next = null;
         }
         n--;
         return item;
@@ -145,12 +150,8 @@ public class Deque<Item> implements Iterable<Item> {
 
         while (!StdIn.isEmpty()) {
             String item = StdIn.readString();
-            if (!item.equals("-")) {
-                queue.addFirst(item);
-                queue.addLast(item);
-            } else {
-                break;
-            }
+            queue.addFirst(item);
+            //queue.addLast(item);
         }
 
         Iterator<String> iterator = queue.iterator();
@@ -160,21 +161,25 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         System.out.println("-------- /n");
-        queue.removeFirst();
 
-        Iterator<String> iterator2 = queue.iterator();
+        for (int i = 0; i < queue.n; i++) {
+            queue.removeFirst();
 
-        while (iterator2.hasNext()) {
-            System.out.println(iterator2.next());
+            Iterator<String> iterator2 = queue.iterator();
+
+            while (iterator2.hasNext()) {
+                System.out.println(iterator2.next());
+            }
+            System.out.println("-------- /n");
         }
-        System.out.println("-------- /n");
 
-        queue.removeLast();
 
-        Iterator<String> iterator3 = queue.iterator();
-
-        while (iterator3.hasNext()) {
-            System.out.println(iterator3.next());
-        }
+//        queue.removeLast();
+//
+//        Iterator<String> iterator3 = queue.iterator();
+//
+//        while (iterator3.hasNext()) {
+//            System.out.println(iterator3.next());
+//        }
     }
 }

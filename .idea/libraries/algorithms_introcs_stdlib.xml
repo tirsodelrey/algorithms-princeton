@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="algorithms_introcs_stdlib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../algorithms/introcs.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../algorithms/stdlib.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../algorithms/introcs.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../algorithms/stdlib.jar!/" />
+    </SOURCES>
+  </library>
+</component>
